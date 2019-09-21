@@ -4,7 +4,6 @@ kind: Deployment
 metadata:
   name: hello-echo
   annotations:
-    fluxcd.io/automated: "true"
     fluxcd.io/tag.hello-echo: glob:master-continuous-*
 spec:
   replicas: 1
