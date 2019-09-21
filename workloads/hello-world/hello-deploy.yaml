@@ -5,6 +5,7 @@ metadata:
   name: hello-echo
   annotations:
     flux.weave.works/automated: "true"
+    fluxcd.io/tag.hello-echo: glob:dev-continuous-*
 spec:
   replicas: 1
   selector:
