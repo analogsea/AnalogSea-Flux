@@ -1,0 +1,19 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: hello-echo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: hello-echo
+  template:
+    metadata:
+      labels:
+        app: hello-echo
+    spec:
+      containers:
+      - name: hello-echo
+        image: iexalt/analogsea-kubernetes-agent:dev-continuous-3
+        ports:
+        - containerPort: 80
