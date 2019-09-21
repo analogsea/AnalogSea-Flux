@@ -18,6 +18,6 @@ spec:
     spec:
       containers:
       - name: hello-echo
-        image: iexalt/analogsea-kubernetes-agent:20190921T152607Z
+        image: iexalt/analogsea-kubernetes-agent:master-continuous-7
         ports:
         - containerPort: 8080
