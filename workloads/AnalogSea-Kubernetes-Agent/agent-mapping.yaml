@@ -1,0 +1,11 @@
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: agent-external
+  namespace: agent
+spec:
+  prefix: /
+  host: agent.analogsea.ca
+  host_regex: true
+  service: agent.agent:8080
+  ambassador_id: ambassador-http
