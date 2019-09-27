@@ -20,3 +20,9 @@ spec:
         image: timescale/timescaledb:1.4.1-pg11-bitnami
         ports:
         - containerPort: 5432
+        env:
+          - name: POSTGRES_PASSWORD
+            valueFrom:
+              secretKeyRef:
+                name: postgres-pass
+                key: pass
