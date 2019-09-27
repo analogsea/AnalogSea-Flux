@@ -20,6 +20,6 @@ spec:
     spec:
       containers:
       - name: agent
-        image: iexalt/analogsea-kubernetes-agent:master-continuous-3
+        image: iexalt/analogsea-kubernetes-agent:20190926T193337Z
         ports:
         - containerPort: 8080
