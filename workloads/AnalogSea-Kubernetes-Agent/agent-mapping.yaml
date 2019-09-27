@@ -7,5 +7,5 @@ spec:
   prefix: /
   host: agent.analogsea.ca
   host_regex: true
-  service: agent.agent:8080
+  service: agent.agent:80
   ambassador_id: ambassador-http
