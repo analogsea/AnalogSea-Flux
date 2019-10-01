@@ -17,8 +17,8 @@ spec:
     spec:
       containers:
       - name: postgres
-        # image: timescale/timescaledb:1.4.1-pg11-bitnami
-        image: postgres:11.5
+        image: timescale/timescaledb:1.4.1-pg11-bitnami
+        # image: postgres:11.5
         ports:
         - containerPort: 5432
         env:
@@ -29,12 +29,13 @@ spec:
               secretKeyRef:
                 name: postgres-pass
                 key: pass
-          - name: PGDATA
+          # - name: PGDATA
+          - name: POSTGRESQL_DATA_DIR
             value: /var/lib/postgresql/data/pgdata
-        volumeMounts:
-          - mountPath: /var/lib/postgresql/data
-            name: postgredb
-      volumes:
-        - name: postgredb
-          persistentVolumeClaim:
-            claimName: postgres-pvc
+      #   volumeMounts:
+      #     - mountPath: /var/lib/postgresql/data
+      #       name: postgredb
+      # volumes:
+      #   - name: postgredb
+      #     persistentVolumeClaim:
+      #       claimName: postgres-pvc
