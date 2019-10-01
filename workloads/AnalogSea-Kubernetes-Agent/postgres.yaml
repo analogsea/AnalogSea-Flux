@@ -28,3 +28,10 @@ spec:
               secretKeyRef:
                 name: postgres-pass
                 key: pass
+        volumeMounts:
+          - mountPath: /var/lib/postgresql/data
+            name: postgredb
+      volumes:
+        - name: postgredb
+          persistentVolumeClaim:
+            claimName: postgres-pvc
