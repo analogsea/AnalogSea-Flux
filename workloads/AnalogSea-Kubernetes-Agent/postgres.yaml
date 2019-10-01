@@ -28,6 +28,8 @@ spec:
               secretKeyRef:
                 name: postgres-pass
                 key: pass
+          - name: PGDATA
+            value: /var/lib/postgresql/data/pgdata
         volumeMounts:
           - mountPath: /var/lib/postgresql/data
             name: postgredb
