@@ -17,7 +17,8 @@ spec:
     spec:
       containers:
       - name: postgres
-        image: timescale/timescaledb:1.4.1-pg11-bitnami
+        # image: timescale/timescaledb:1.4.1-pg11-bitnami
+        image: postgres:11.5
         ports:
         - containerPort: 5432
         env:
