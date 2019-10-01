@@ -1,10 +1,10 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: postgres-pvc
+  name: timescale-pvc
   labels:
-    app: postgres
-  namespace: agent
+    app: timescale
+  namespace: runescrape
 spec:
   storageClassName: csi-rbd
   accessModes:
