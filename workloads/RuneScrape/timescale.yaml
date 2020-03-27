@@ -1,3 +1,4 @@
+---
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -5,6 +6,8 @@ metadata:
   labels:
     app: timescale
   namespace: runescrape
+  annotations:
+    fluxcd.io/locked: 'true'
 spec:
   replicas: 1
   selector:
@@ -21,19 +24,19 @@ spec:
         ports:
         - containerPort: 5432
         env:
-          - name: POSTGRES_USER
-            value: "postgres"
-          - name: POSTGRES_PASSWORD
-            valueFrom:
-              secretKeyRef:
-                name: timescale-pass
-                key: pass
-          - name: PGDATA
-            value: /var/lib/postgresql/data/pgdata
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: timescale-pass
+              key: pass
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
         volumeMounts:
-          - mountPath: /var/lib/postgresql/data
-            name: timescaledb
+        - mountPath: /var/lib/postgresql/data
+          name: timescaledb
       volumes:
-        - name: timescaledb
-          persistentVolumeClaim:
-            claimName: timescale-pvc
+      - name: timescaledb
+        persistentVolumeClaim:
+          claimName: timescale-pvc
