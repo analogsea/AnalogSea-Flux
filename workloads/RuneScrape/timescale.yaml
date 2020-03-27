@@ -6,8 +6,6 @@ metadata:
   labels:
     app: timescale
   namespace: runescrape
-  annotations:
-    fluxcd.io/locked: 'true'
 spec:
   replicas: 1
   selector:
