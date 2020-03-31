@@ -1,0 +1,35 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: flyway
+  labels:
+    app: flyway
+  namespace: runescrape
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: flyway
+  template:
+    metadata:
+      labels:
+        app: flyway
+    spec:
+      containers:
+      - name: flyway
+        image: flyway/flyway:6.3-alpine
+        # env:
+        # - name: POSTGRES_USER
+        #   value: "postgres"
+        # - name: POSTGRES_PASSWORD
+        #   valueFrom:
+        #     secretKeyRef:
+        #       name: timescale-pass
+        #       key: pass
+      #   - mountPath: /var/lib/postgresql
+      #     name: timescaledb
+      # volumes:
+      # - name: timescaledb
+      #   persistentVolumeClaim:
+      #     claimName: timescale-pvc
