@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: postgres
+  labels:
+    app: postgres
+  namespace: flask-playground
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: postgres
+  template:
+    metadata:
+      labels:
+        app: postgres
+    spec:
+      containers:
+      - name: postgres
+        image: postgres:11.7-alpine
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: postgres-pass
+              key: pass
+        # - name: PGDATA
+          # value: /var/lib/postgresql/data
+        volumeMounts:
+        - mountPath: /var/lib/postgresql
+          name: postgresvol
+      volumes:
+      - name: postgresvol
+        persistentVolumeClaim:
+          claimName: postgres-pvc
