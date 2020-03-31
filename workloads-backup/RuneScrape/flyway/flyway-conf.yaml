@@ -1,0 +1,8 @@
+apiVersion: v1
+data:
+  flyway-conf: Zmx5d2F5LnVybD1qZGJjOnBvc3RncmVzcWw6Ly90aW1lc2NhbGU6NTQzMi9ydW5lc2NyYXBlCmZseXdheS51c2VyPXBvc3RncmVzCmZseXdheS5wYXNzd29yZD1UZXN0MTIzNCEK
+kind: Secret
+metadata:
+  creationTimestamp: null
+  name: flyway-conf
+  namespace: runescrape
