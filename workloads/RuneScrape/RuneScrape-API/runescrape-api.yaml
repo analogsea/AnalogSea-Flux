@@ -8,6 +8,7 @@ metadata:
   annotations:
     fluxcd.io/automated: "true"
     fluxcd.io/tag.runescrape-api: glob:master-continuous-*
+    fluxcd.io/tag.initdb: glob:master-continuous-*
   namespace: runescrape
 spec:
   replicas: 1
@@ -19,6 +20,21 @@ spec:
       labels:
         app: runescrape-api
     spec:
+      initContainers:
+      - name: initdb
+        image: iexalt/runescrape-api:master-continuous-7
+        command: ['flask', 'db', 'upgrade']
+        env:
+        - name: DB_HOST
+          value: "timescale.runescrape"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: timescale-pass
+              key: pass
+
       containers:
       - name: runescrape-api
         image: iexalt/runescrape-api:master-continuous-7
