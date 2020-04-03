@@ -1,0 +1,34 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runescrape-api
+  labels:
+    app: runescrape-api
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.runescrape-api: glob:master-continuous-*
+  namespace: runescrape
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: runescrape-api
+  template:
+    metadata:
+      labels:
+        app: runescrape-api
+    spec:
+      containers:
+      - name: runescrape-api
+        image: iexalt/runescrape-api:master-continuous-3
+        env:
+        - name: DB_HOST
+          value: "timescale.runescrape"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: timescale-pass
+              key: pass
