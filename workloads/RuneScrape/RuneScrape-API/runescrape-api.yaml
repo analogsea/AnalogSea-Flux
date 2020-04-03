@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: runescrape-api
-        image: iexalt/runescrape-api:master-continuous-4
+        image: iexalt/runescrape-api:master-continuous-5
         env:
         - name: DB_HOST
           value: "timescale.runescrape"
