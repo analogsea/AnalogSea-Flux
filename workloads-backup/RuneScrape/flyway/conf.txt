@@ -1,0 +1,3 @@
+flyway.url=jdbc:postgresql://timescale:5432/runescrape
+flyway.user=postgres
+flyway.password=Test1234!
