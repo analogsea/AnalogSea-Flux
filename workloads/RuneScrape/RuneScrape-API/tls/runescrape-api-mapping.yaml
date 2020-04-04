@@ -8,3 +8,4 @@ spec:
   host: runescrape.analogsea.ca
   host_regex: true
   service: runescape-api.runescrape:80
+  timeout_ms: 30000
