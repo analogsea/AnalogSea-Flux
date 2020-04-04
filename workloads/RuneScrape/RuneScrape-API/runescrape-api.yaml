@@ -37,7 +37,9 @@ spec:
 
       containers:
       - name: runescrape-api
-        image: iexalt/runescrape-api:master-continuous-9
+        image: iexalt/runescrape-api:master-continuous-7
+        ports:
+        - containerPort: 8080
         env:
         - name: DB_HOST
           value: "timescale.runescrape"
