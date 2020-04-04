@@ -22,7 +22,7 @@ spec:
     spec:
       initContainers:
       - name: initdb
-        image: iexalt/runescrape-api:master-continuous-8
+        image: iexalt/runescrape-api:master-continuous-9
         command: ['flask', 'db', 'upgrade']
         env:
         - name: DB_HOST
@@ -37,7 +37,7 @@ spec:
 
       containers:
       - name: runescrape-api
-        image: iexalt/runescrape-api:master-continuous-8
+        image: iexalt/runescrape-api:master-continuous-9
         env:
         - name: DB_HOST
           value: "timescale.runescrape"
