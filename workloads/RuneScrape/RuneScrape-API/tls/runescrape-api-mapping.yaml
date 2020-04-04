@@ -1,0 +1,10 @@
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-external
+  namespace: runescrape
+spec:
+  prefix: /
+  host: runescrape.analogsea.ca
+  host_regex: true
+  service: runescape-api.runescrape:80
