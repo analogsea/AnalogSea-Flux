@@ -8,6 +8,7 @@ metadata:
   annotations:
     fluxcd.io/automated: "true"
     fluxcd.io/tag.runescrape-agent: glob:master-continuous-*
+    fluxcd.io/locked: 'true'
   namespace: runescrape
 spec:
   replicas: 1
