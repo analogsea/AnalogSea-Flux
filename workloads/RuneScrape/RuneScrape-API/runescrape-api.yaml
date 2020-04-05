@@ -22,7 +22,7 @@ spec:
     spec:
       initContainers:
       - name: initdb
-        image: iexalt/runescrape-api:master-continuous-13
+        image: iexalt/runescrape-api:master-continuous-15
         command: ['flask', 'db', 'upgrade']
         env:
         - name: DB_HOST
