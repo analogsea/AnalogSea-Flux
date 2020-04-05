@@ -26,3 +26,5 @@ spec:
         env:
         - name: RUNESCRAPE_SERVICE
           value: "runescape-api.runescrape"
+        - name: RUNESCRAPE_ENDPOINT
+          value: "items/history"
