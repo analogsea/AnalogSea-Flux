@@ -9,6 +9,7 @@ metadata:
     fluxcd.io/automated: "true"
     fluxcd.io/tag.runescrape-api: glob:master-continuous-*
     fluxcd.io/tag.initdb: glob:master-continuous-*
+    fluxcd.io/locked: 'true'
   namespace: runescrape
 spec:
   replicas: 1
