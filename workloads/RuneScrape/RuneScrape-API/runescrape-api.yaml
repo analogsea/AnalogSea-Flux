@@ -9,7 +9,6 @@ metadata:
     fluxcd.io/automated: "true"
     fluxcd.io/tag.runescrape-api: glob:master-continuous-*
     fluxcd.io/tag.initdb: glob:master-continuous-*
-    fluxcd.io/locked: 'true'
   namespace: runescrape
 spec:
   replicas: 1
@@ -38,7 +37,7 @@ spec:
 
       containers:
       - name: runescrape-api
-        image: iexalt/runescrape-api:master-continuous-13
+        image: iexalt/runescrape-api:master-continuous-15
         ports:
         - containerPort: 8080
         env:

@@ -8,7 +8,6 @@ metadata:
   annotations:
     fluxcd.io/automated: "true"
     fluxcd.io/tag.runescrape-agent: glob:master-continuous-*
-    fluxcd.io/locked: 'true'
   namespace: runescrape
 spec:
   replicas: 1
@@ -22,7 +21,7 @@ spec:
     spec:
       containers:
       - name: runescrape-agent
-        image: iexalt/runescrape-agent:master-continuous-12
+        image: iexalt/runescrape-agent:master-continuous-14
         env:
         - name: RUNESCRAPE_SERVICE
           value: "runescape-api.runescrape"
