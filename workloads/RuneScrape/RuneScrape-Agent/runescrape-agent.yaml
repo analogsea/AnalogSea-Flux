@@ -24,6 +24,6 @@ spec:
         image: iexalt/runescrape-agent:master-continuous-14
         env:
         - name: RUNESCRAPE_SERVICE
-          value: "runescape-api.runescrape"
+          value: "runescrape-api.runescrape"
         - name: RUNESCRAPE_ENDPOINT
           value: "items/history"
