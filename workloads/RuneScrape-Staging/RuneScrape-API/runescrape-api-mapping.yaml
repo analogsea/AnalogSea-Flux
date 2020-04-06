@@ -1,0 +1,27 @@
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-external-redirect
+  namespace: runescrape-staging
+spec:
+  prefix: /items/history
+  host: runescrape.staging.analogsea.ca
+  method: POST
+  host_regex: true
+  host_redirect: true
+  service: https://httpbin.org/post
+  timeout_ms: 30000
+---
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-external
+  namespace: runescrape-staging
+spec:
+  prefix: /
+  host: runescrape.staging.analogsea.ca
+  host_regex: true
+  service: runescrape-api.runescrape-staging:80
+  cors:
+    origins: "*"
+  timeout_ms: 30000

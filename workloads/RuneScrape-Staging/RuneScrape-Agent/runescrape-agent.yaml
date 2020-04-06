@@ -24,6 +24,6 @@ spec:
         image: iexalt/runescrape-agent:dev-continuous-15
         env:
         - name: RUNESCRAPE_SERVICE
-          value: "runescape-api.runescrape"
+          value: "runescrape-api.runescrape-staging"
         - name: RUNESCRAPE_ENDPOINT
           value: "items/history"
