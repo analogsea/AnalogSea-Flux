@@ -3,23 +3,23 @@ kind: Mapping
 metadata:
   name: runescrape-external-redirect
   namespace: runescrape
-  spec:
-    prefix: /items/history
-    host: runescrape.analogsea.ca
-    method: POST
-    host_regex: true
-    host_redirect: true
-    service: https://httpbin.org
-    timeout_ms: 30000
+spec:
+  prefix: /items/history
+  host: runescrape.analogsea.ca
+  method: POST
+  host_regex: true
+  host_redirect: true
+  service: https://httpbin.org/post
+  timeout_ms: 30000
 ---
-  apiVersion: getambassador.io/v1
-  kind: Mapping
-  metadata:
-    name: runescrape-external
-    namespace: runescrape
-    spec:
-      prefix: /
-      host: runescrape.analogsea.ca
-      host_regex: true
-      service: runescape-api.runescrape:80
-      timeout_ms: 30000
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-external
+  namespace: runescrape
+spec:
+  prefix: /
+  host: runescrape.analogsea.ca
+  host_regex: true
+  service: runescrape-api.runescrape:80
+  timeout_ms: 30000
