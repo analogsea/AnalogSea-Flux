@@ -22,4 +22,6 @@ spec:
   host: runescrape.analogsea.ca
   host_regex: true
   service: runescrape-api.runescrape:80
+  cors:
+    origins: "*"
   timeout_ms: 30000
