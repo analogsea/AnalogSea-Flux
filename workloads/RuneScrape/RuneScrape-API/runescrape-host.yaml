@@ -1,7 +1,7 @@
 apiVersion: getambassador.io/v2
 kind: Host
 metadata:
-  name: runescrape-api-host
+  name: runescrape-api
   namespace: runescrape
 spec:
   hostname: runescrape.analogsea.ca
