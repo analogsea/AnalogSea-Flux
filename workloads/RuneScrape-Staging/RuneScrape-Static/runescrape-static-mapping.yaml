@@ -1,0 +1,12 @@
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-static
+  namespace: runescrape-staging
+spec:
+  prefix: ".*view"
+  host: runescrape.staging.analogsea.ca
+  service: runescrape-static.runescrape-staging:80
+  cors:
+    origins: "*"
+  timeout_ms: 30000

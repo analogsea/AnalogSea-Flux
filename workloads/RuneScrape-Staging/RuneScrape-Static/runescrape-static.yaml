@@ -1,0 +1,24 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runescrape-static
+  labels:
+    app: runescrape-static
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.runescrape-agent: glob:dev-continuous-*
+  namespace: runescrape-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: runescrape-static
+  template:
+    metadata:
+      labels:
+        app: runescrape-static
+    spec:
+      containers:
+      - name: runescrape-static
+        image: iexalt/runescrape-static:dev-continuous-1
