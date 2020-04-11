@@ -26,7 +26,7 @@ spec:
         command: ['flask', 'db', 'upgrade']
         env:
         - name: DB_HOST
-          value: "timescale.runescrape"
+          value: "timescale.runescrape-staging"
         - name: DB_USER
           value: "postgres"
         - name: DB_PASSWORD
