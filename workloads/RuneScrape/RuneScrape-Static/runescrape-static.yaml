@@ -7,7 +7,7 @@ metadata:
     app: runescrape-static
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.runescrape-agent: glob:dev-continuous-*
+    fluxcd.io/tag.runescrape-static: glob:dev-continuous-*
   namespace: runescrape
 spec:
   replicas: 1
