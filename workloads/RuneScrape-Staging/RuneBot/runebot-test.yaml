@@ -1,0 +1,26 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runebot-test
+  labels:
+    app: runebot-test
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.runescrape-agent: glob:master-continuous-*
+  namespace: runescrape-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: runebot-test
+  template:
+    metadata:
+      labels:
+        app: runebot-test
+    spec:
+      containers:
+      - name: runebot-test
+        image: iexalt/runebot:master-continuous-2
+      imagePullSecrets:
+      - name: docker-credentials
