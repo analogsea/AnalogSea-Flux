@@ -21,6 +21,6 @@ spec:
     spec:
       containers:
       - name: runebot-test
-        image: iexalt/runebot:master
+        image: iexalt/runebot:f5989b6
       imagePullSecrets:
       - name: docker-credentials
