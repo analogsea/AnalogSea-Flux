@@ -1,0 +1,31 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pvc-testing-2
+  labels:
+    app: pvc-testing-2
+  namespace: runescrape-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: pvc-testing-2
+  template:
+    metadata:
+      labels:
+        app: pvc-testing-2
+    spec:
+      containers:
+      - name: pvc-testing
+        image: ubuntu:18.04
+        volumeMounts:
+        - mountPath: /mnt/pvc
+          name: pvc
+        command:
+        - bash
+        args: ["-c", "coproc { exec >&-; read; }; eval exec \"${COPROC[0]}<&-\"; wait"]
+      volumes:
+      - name: pvc
+        persistentVolumeClaim:
+          claimName: snapshot-pvc

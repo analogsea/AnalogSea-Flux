@@ -1,0 +1,18 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: original-pvc
+  labels:
+    app: timescale-testing
+  namespace: runescrape-staging
+spec:
+  storageClassName: rook-ext4
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi
+  # dataSource:
+  #   name: timescale-pvc-snapshot
+  #   kind: VolumeSnapshot
+  #   apiGroup: snapshot.storage.k8s.io

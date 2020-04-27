@@ -1,0 +1,3 @@
+CREATE TABLE test(id SERIAL PRIMARY KEY, val INT);
+INSERT INTO test (val) VALUES (3);
+SELECT * FROM test;

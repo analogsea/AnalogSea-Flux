@@ -2,23 +2,25 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  name: timescale
+  name: postgres
   labels:
-    app: timescale
-  namespace: runescrape
+    app: postgres
+  namespace: runescrape-staging
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: timescale
+      app: postgres
   template:
     metadata:
       labels:
-        app: timescale
+        app: postgres
     spec:
       containers:
+      # - name: postgres
+      #   image: postgres:11.7
       - name: timescale
-        image: timescale/timescaledb:1.4.2-pg11
+        image: timescale/timescaledb:1.6.1-pg11
         ports:
         - containerPort: 5432
         env:
@@ -30,11 +32,11 @@ spec:
               name: timescale-pass
               key: pass
         - name: PGDATA
-          value: /var/lib/postgresql/data/pgdata
+          value: /postgresql/data
         volumeMounts:
-        - mountPath: /var/lib/postgresql/data
-          name: timescaledb
+        - mountPath: /postgresql
+          name: postgres
       volumes:
-      - name: timescaledb
+      - name: postgres
         persistentVolumeClaim:
-          claimName: timescale-pvc
+          claimName: postgres-pvc

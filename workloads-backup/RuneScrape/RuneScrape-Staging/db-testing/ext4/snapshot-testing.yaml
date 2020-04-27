@@ -1,0 +1,63 @@
+# ---
+# apiVersion: apps/v1
+# kind: Deployment
+# metadata:
+#   name: snapshot-testing
+#   labels:
+#     app: snapshot-testing
+#   namespace: runescrape-staging
+# spec:
+#   replicas: 1
+#   selector:
+#     matchLabels:
+#       app: snapshot-testing
+#   template:
+#     metadata:
+#       labels:
+#         app: snapshot-testing
+#     spec:
+#       containers:
+#       - name: timescale
+#         image: timescale/timescaledb:1.6.1-pg11
+#         ports:
+#         - containerPort: 5432
+#         env:
+#         - name: POSTGRES_USER
+#           value: "postgres"
+#         - name: POSTGRES_PASSWORD
+#           valueFrom:
+#             secretKeyRef:
+#               name: timescale-pass
+#               key: pass
+#         # - name: PGDATA
+#           # value: /var/lib/postgresql/data
+#         volumeMounts:
+#         - mountPath: /var/lib/postgresql
+#           name: timescaledb
+#       volumes:
+#       - name: timescaledb
+#         persistentVolumeClaim:
+#           claimName: snapshot-pvc
+---
+apiVersion: v1
+kind: Pod
+metadata:
+  name: csicephfs-demo-pod
+  namespace: runescrape-staging
+spec:
+  containers:
+  - name: ubuntu-tools
+    image: ubuntu:18.04
+    command:
+    - "tail"
+    args:
+    - "-f"
+    - "/dev/null"
+    volumeMounts:
+    - name: rbd
+      mountPath: /mnt/rbd
+  volumes:
+  - name: rbd
+    persistentVolumeClaim:
+      claimName: snapshot-pvc
+      readOnly: false

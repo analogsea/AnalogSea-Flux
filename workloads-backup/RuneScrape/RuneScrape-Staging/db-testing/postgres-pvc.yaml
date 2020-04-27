@@ -1,14 +1,14 @@
 kind: PersistentVolumeClaim
 apiVersion: v1
 metadata:
-  name: timescale-pvc
+  name: postgres-pvc
   labels:
     app: timescale
-  namespace: runescrape
+  namespace: runescrape-staging
 spec:
-  storageClassName: csi-rbd
+  storageClassName: rook-ceph-block
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
-      storage: 70Gi
+      storage: 50Gi

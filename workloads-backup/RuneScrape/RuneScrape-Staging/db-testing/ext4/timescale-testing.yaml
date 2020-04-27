@@ -1,0 +1,40 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timescale-testing
+  labels:
+    app: timescale-testing
+  namespace: runescrape-staging
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timescale-testing
+  template:
+    metadata:
+      labels:
+        app: timescale-testing
+    spec:
+      containers:
+      - name: timescale
+        image: timescale/timescaledb:1.6.1-pg11
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: timescale-pass
+              key: pass
+        # - name: PGDATA
+          # value: /var/lib/postgresql/data
+        volumeMounts:
+        - mountPath: /var/lib/postgresql
+          name: timescaledb
+      volumes:
+      - name: timescaledb
+        persistentVolumeClaim:
+          claimName: original-pvc
