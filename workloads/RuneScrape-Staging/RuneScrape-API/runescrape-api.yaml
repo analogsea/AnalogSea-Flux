@@ -7,8 +7,8 @@ metadata:
     app: runescrape-api
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.runescrape-api: glob:dev-continuous-*
-    fluxcd.io/tag.initdb: glob:dev-continuous-*
+    fluxcd.io/tag.runescrape-api: glob:staging-continuous-*
+    fluxcd.io/tag.initdb: glob:staging-continuous-*
   namespace: runescrape-staging
 spec:
   replicas: 1
@@ -22,7 +22,7 @@ spec:
     spec:
       initContainers:
       - name: initdb
-        image: iexalt/runescrape-api:dev-continuous-39
+        image: iexalt/runescrape-api:staging-continuous-43
         command: ['flask', 'db', 'upgrade']
         env:
         - name: DB_HOST
@@ -37,7 +37,7 @@ spec:
 
       containers:
       - name: runescrape-api
-        image: iexalt/runescrape-api:dev-continuous-39
+        image: iexalt/runescrape-api:staging-continuous-43
         ports:
         - containerPort: 8080
         env:

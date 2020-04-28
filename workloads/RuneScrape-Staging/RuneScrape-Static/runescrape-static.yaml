@@ -7,7 +7,7 @@ metadata:
     app: runescrape-static
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.runescrape-static: glob:dev-continuous-*
+    fluxcd.io/tag.runescrape-static: glob:staging-continuous-*
   namespace: runescrape-staging
 spec:
   replicas: 1
@@ -21,4 +21,4 @@ spec:
     spec:
       containers:
       - name: runescrape-static
-        image: iexalt/runescrape-static:dev-continuous-5
+        image: iexalt/runescrape-static:staging-continuous-11

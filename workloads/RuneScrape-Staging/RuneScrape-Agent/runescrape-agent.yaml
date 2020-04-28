@@ -7,7 +7,7 @@ metadata:
     app: runescrape-agent
   annotations:
     fluxcd.io/automated: "true"
-    fluxcd.io/tag.runescrape-agent: glob:dev-continuous-*
+    fluxcd.io/tag.runescrape-agent: glob:staging-continuous-*
   namespace: runescrape-staging
 spec:
   replicas: 1
@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: runescrape-agent
-        image: iexalt/runescrape-agent:dev-continuous-15
+        image: iexalt/runescrape-agent:staging-continuous-20
         env:
         - name: RUNESCRAPE_SERVICE
           value: "runescrape-api.runescrape-staging"
