@@ -1,0 +1,10 @@
+apiVersion: snapshot.storage.k8s.io/v1alpha1
+kind: VolumeSnapshot
+metadata:
+  name: pvc-snapshot
+  namespace: runescrape
+spec:
+  snapshotClassName: rook-ceph-block-snapclass
+  source:
+    name: timescale-pvc
+    kind: PersistentVolumeClaim
