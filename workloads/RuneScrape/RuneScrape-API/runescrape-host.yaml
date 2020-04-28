@@ -7,3 +7,7 @@ spec:
   hostname: runescrape.analogsea.ca
   acmeProvider:
     email: cklliaw@uwaterloo.ca
+  requestPolicy:
+    insecure:
+      action: Redirect
+      additionalPort: 8080
