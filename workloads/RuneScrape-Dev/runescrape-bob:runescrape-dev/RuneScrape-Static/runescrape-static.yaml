@@ -24,4 +24,4 @@ spec:
     spec:
       containers:
       - name: runescrape-static
-        image: iexalt/runescrape-static:dev-bob
+        image: iexalt/runescrape-static:dev-bob-continuous-12
