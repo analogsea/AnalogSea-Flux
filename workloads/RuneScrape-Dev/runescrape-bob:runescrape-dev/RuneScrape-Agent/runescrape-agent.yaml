@@ -24,7 +24,7 @@ spec:
     spec:
       containers:
       - name: runescrape-agent
-        image: iexalt/runescrape-agent:dev-bob
+        image: iexalt/runescrape-agent:dev-bob-continuous-21
         env:
         - name: RUNESCRAPE_SERVICE
           value: "runescrape-api-bob.runescrape-dev"
