@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runescrape-api-$SUFFIX
+  labels:
+    app: runescrape-api-$SUFFIX
+    suffix: $SUFFIX
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.runescrape-api: glob:$NAMESPACE-$SUFFIX-continuous-*
+    fluxcd.io/tag.initdb: glob:$NAMESPACE-$SUFFIX-continuous-*
+  namespace: runescrape-$NAMESPACE
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: runescrape-api-$SUFFIX
+      suffix: $SUFFIX
+  template:
+    metadata:
+      labels:
+        app: runescrape-api-$SUFFIX
+        suffix: $SUFFIX
+    spec:
+      initContainers:
+      - name: initdb
+        image: iexalt/runescrape-api:$NAMESPACE-$SUFFIX
+        command: ['flask', 'db', 'upgrade']
+        env:
+        - name: DB_HOST
+          value: "timescale-$SUFFIX.runescrape-$NAMESPACE"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: timescale-pass-$SUFFIX
+              key: pass
+
+      containers:
+      - name: runescrape-api
+        image: iexalt/runescrape-api:$NAMESPACE-$SUFFIX
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_HOST
+          value: "timescale-$SUFFIX.runescrape-$NAMESPACE"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: timescale-pass-$SUFFIX
+              key: pass

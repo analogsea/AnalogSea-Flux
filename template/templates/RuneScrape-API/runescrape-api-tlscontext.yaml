@@ -1,0 +1,12 @@
+apiVersion: getambassador.io/v1
+kind: TLSContext
+metadata:
+  name: runescrape-staging-context-$SUFFIX
+  namespace: ambassador
+  labels:
+    suffix: $SUFFIX
+spec:
+  alpn_protocols: h2,http/1.1
+  hosts:
+  - runescrape.$NAMESPACE.$SUFFIX.analogsea.ca
+  secret: runescrape.$NAMESPACE.$SUFFIX.analogsea.ca

@@ -1,0 +1,29 @@
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-external-redirect-$SUFFIX
+  namespace: runescrape-$NAMESPACE
+  labels:
+    suffix: $SUFFIX
+spec:
+  prefix: /items/history
+  host: runescrape.$NAMESPACE.$SUFFIX.analogsea.ca
+  method: POST
+  host_redirect: true
+  service: https://httpbin.org/post
+  timeout_ms: 30000
+---
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-external-$SUFFIX
+  namespace: runescrape-$NAMESPACE
+  labels:
+    suffix: $SUFFIX
+spec:
+  prefix: /
+  host: runescrape.$NAMESPACE.$SUFFIX.analogsea.ca
+  service: runescrape-api-$SUFFIX.runescrape-$NAMESPACE:80
+  cors:
+    origins: "*"
+  timeout_ms: 30000

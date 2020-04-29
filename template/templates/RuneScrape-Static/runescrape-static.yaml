@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runescrape-static-$SUFFIX
+  labels:
+    app: runescrape-static-$SUFFIX
+    suffix: $SUFFIX
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.runescrape-static: glob:$NAMESPACE-$SUFFIX-continuous-*
+  namespace: runescrape-$NAMESPACE
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: runescrape-static-$SUFFIX
+      suffix: $SUFFIX
+  template:
+    metadata:
+      labels:
+        app: runescrape-static-$SUFFIX
+        suffix: $SUFFIX
+    spec:
+      containers:
+      - name: runescrape-static
+        image: iexalt/runescrape-static:$NAMESPACE-$SUFFIX

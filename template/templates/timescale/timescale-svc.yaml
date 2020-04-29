@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: timescale-$SUFFIX
+  namespace: runescrape-$NAMESPACE
+  labels:
+    suffix: $SUFFIX
+spec:
+  type: ClusterIP
+  ports:
+  - port: 5432
+    targetPort: 5432
+  selector:
+    app: timescale-$SUFFIX
+    suffix: $SUFFIX

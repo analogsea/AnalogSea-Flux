@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runescrape-static-bob
+  labels:
+    app: runescrape-static-bob
+    suffix: bob
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.runescrape-static: glob:dev-bob-continuous-*
+  namespace: runescrape-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: runescrape-static-bob
+      suffix: bob
+  template:
+    metadata:
+      labels:
+        app: runescrape-static-bob
+        suffix: bob
+    spec:
+      containers:
+      - name: runescrape-static
+        image: iexalt/runescrape-static:dev-bob

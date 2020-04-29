@@ -1,0 +1,16 @@
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-static-bob
+  namespace: runescrape-dev
+  labels:
+    suffix: bob
+spec:
+  prefix: ".*view.*"
+  prefix_regex: true
+  rewrite: ""
+  host: runescrape.dev.bob.analogsea.ca
+  service: runescrape-static-bob.runescrape-dev:80
+  cors:
+    origins: "*"
+  timeout_ms: 30000

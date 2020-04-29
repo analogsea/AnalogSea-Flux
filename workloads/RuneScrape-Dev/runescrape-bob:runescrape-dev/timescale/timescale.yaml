@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timescale-bob
+  labels:
+    app: timescale-bob
+    suffix: bob
+  namespace: runescrape-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timescale-bob
+      suffix: bob
+  template:
+    metadata:
+      labels:
+        app: timescale-bob
+        suffix: bob
+    spec:
+      containers:
+      - name: timescale
+        image: timescale/timescaledb:1.6.1-pg11
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: timescale-pass-bob
+              key: pass
+        - name: PGDATA
+          value: /postgresql/data
+        volumeMounts:
+        - mountPath: /postgresql
+          name: timescaledb
+      volumes:
+      - name: timescaledb
+        persistentVolumeClaim:
+          claimName: timescale-pvc-bob

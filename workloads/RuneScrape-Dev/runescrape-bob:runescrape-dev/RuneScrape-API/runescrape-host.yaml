@@ -1,0 +1,15 @@
+apiVersion: getambassador.io/v2
+kind: Host
+metadata:
+  name: runescrape-dev-bob
+  namespace: runescrape-dev
+  labels:
+    suffix: bob
+spec:
+  hostname: runescrape.dev.bob.analogsea.ca
+  acmeProvider:
+    email: cklliaw@uwaterloo.ca
+  requestPolicy:
+    insecure:
+      action: Redirect
+      additionalPort: 8080

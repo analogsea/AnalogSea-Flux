@@ -1,0 +1,15 @@
+kind: PersistentVolumeClaim
+apiVersion: v1
+metadata:
+  name: timescale-pvc-$SUFFIX
+  labels:
+    app: timescale
+    suffix: $SUFFIX
+  namespace: runescrape-$NAMESPACE
+spec:
+  storageClassName: rook-ceph-block
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      storage: 50Gi

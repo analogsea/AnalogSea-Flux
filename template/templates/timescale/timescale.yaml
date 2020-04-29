@@ -1,0 +1,43 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: timescale-$SUFFIX
+  labels:
+    app: timescale-$SUFFIX
+    suffix: $SUFFIX
+  namespace: runescrape-$NAMESPACE
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: timescale-$SUFFIX
+      suffix: $SUFFIX
+  template:
+    metadata:
+      labels:
+        app: timescale-$SUFFIX
+        suffix: $SUFFIX
+    spec:
+      containers:
+      - name: timescale
+        image: timescale/timescaledb:1.6.1-pg11
+        ports:
+        - containerPort: 5432
+        env:
+        - name: POSTGRES_USER
+          value: "postgres"
+        - name: POSTGRES_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: timescale-pass-$SUFFIX
+              key: pass
+        - name: PGDATA
+          value: /postgresql/data
+        volumeMounts:
+        - mountPath: /postgresql
+          name: timescaledb
+      volumes:
+      - name: timescaledb
+        persistentVolumeClaim:
+          claimName: timescale-pvc-$SUFFIX

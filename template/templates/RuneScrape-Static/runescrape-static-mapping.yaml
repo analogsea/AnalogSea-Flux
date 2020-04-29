@@ -1,0 +1,16 @@
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-static-$SUFFIX
+  namespace: runescrape-$NAMESPACE
+  labels:
+    suffix: $SUFFIX
+spec:
+  prefix: ".*view.*"
+  prefix_regex: true
+  rewrite: ""
+  host: runescrape.$NAMESPACE.$SUFFIX.analogsea.ca
+  service: runescrape-static-$SUFFIX.runescrape-$NAMESPACE:80
+  cors:
+    origins: "*"
+  timeout_ms: 30000

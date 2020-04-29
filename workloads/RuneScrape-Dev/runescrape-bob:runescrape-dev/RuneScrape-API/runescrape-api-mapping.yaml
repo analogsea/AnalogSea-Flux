@@ -1,0 +1,29 @@
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-external-redirect-bob
+  namespace: runescrape-dev
+  labels:
+    suffix: bob
+spec:
+  prefix: /items/history
+  host: runescrape.dev.bob.analogsea.ca
+  method: POST
+  host_redirect: true
+  service: https://httpbin.org/post
+  timeout_ms: 30000
+---
+apiVersion: getambassador.io/v1
+kind: Mapping
+metadata:
+  name: runescrape-external-bob
+  namespace: runescrape-dev
+  labels:
+    suffix: bob
+spec:
+  prefix: /
+  host: runescrape.dev.bob.analogsea.ca
+  service: runescrape-api-bob.runescrape-dev:80
+  cors:
+    origins: "*"
+  timeout_ms: 30000

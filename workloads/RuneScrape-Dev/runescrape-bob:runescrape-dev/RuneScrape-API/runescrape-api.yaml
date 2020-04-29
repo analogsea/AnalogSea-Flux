@@ -1,0 +1,55 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: runescrape-api-bob
+  labels:
+    app: runescrape-api-bob
+    suffix: bob
+  annotations:
+    fluxcd.io/automated: "true"
+    fluxcd.io/tag.runescrape-api: glob:dev-bob-continuous-*
+    fluxcd.io/tag.initdb: glob:dev-bob-continuous-*
+  namespace: runescrape-dev
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: runescrape-api-bob
+      suffix: bob
+  template:
+    metadata:
+      labels:
+        app: runescrape-api-bob
+        suffix: bob
+    spec:
+      initContainers:
+      - name: initdb
+        image: iexalt/runescrape-api:dev-bob-continuous-44
+        command: ['flask', 'db', 'upgrade']
+        env:
+        - name: DB_HOST
+          value: "timescale-bob.runescrape-dev"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: timescale-pass-bob
+              key: pass
+
+      containers:
+      - name: runescrape-api
+        image: iexalt/runescrape-api:dev-bob-continuous-44
+        ports:
+        - containerPort: 8080
+        env:
+        - name: DB_HOST
+          value: "timescale-bob.runescrape-dev"
+        - name: DB_USER
+          value: "postgres"
+        - name: DB_PASSWORD
+          valueFrom:
+            secretKeyRef:
+              name: timescale-pass-bob
+              key: pass

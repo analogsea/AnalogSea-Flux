@@ -1,0 +1,12 @@
+apiVersion: getambassador.io/v1
+kind: TLSContext
+metadata:
+  name: runescrape-staging-context-bob
+  namespace: ambassador
+  labels:
+    suffix: bob
+spec:
+  alpn_protocols: h2,http/1.1
+  hosts:
+  - runescrape.dev.bob.analogsea.ca
+  secret: runescrape.dev.bob.analogsea.ca
