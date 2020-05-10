@@ -25,7 +25,7 @@ spec:
     spec:
       initContainers:
       - name: initdb
-        image: iexalt/runescrape-api:dev-bob-continuous-58
+        image: iexalt/runescrape-api:dev-bob-continuous-59
         command: ['flask', 'db', 'upgrade']
         env:
         - name: DB_HOST
@@ -40,7 +40,7 @@ spec:
 
       containers:
       - name: runescrape-api
-        image: iexalt/runescrape-api:dev-bob-continuous-58
+        image: iexalt/runescrape-api:dev-bob-continuous-59
         ports:
         - containerPort: 8080
         env:
