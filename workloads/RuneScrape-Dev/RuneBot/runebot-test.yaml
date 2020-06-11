@@ -22,6 +22,8 @@ spec:
       containers:
       - name: runebot-test
         image: iexalt/runebot:master-continuous-68
+        tty: true
+        stdin: true
         env:
         - name: RUNEBOT_AUTOSTART
           value: "true"
