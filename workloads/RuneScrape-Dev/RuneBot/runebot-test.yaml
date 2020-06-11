@@ -22,5 +22,8 @@ spec:
       containers:
       - name: runebot-test
         image: iexalt/runebot:master-continuous-68
+        env:
+        - name: RUNEBOT_AUTOSTART
+          value: "true"
       imagePullSecrets:
       - name: docker-credentials
