@@ -21,7 +21,7 @@ spec:
     spec:
       containers:
       - name: runebot-test
-        image: iexalt/runebot:master
+        image: iexalt/runebot:master-continuous-75
         tty: true
         stdin: true
         env:
