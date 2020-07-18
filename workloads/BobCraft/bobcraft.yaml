@@ -1,0 +1,37 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: bobcraft
+  labels:
+    app: bobcraft
+  namespace: bobcraft
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: bobcraft
+  template:
+    metadata:
+      labels:
+        app: bobcraft
+    spec:
+      containers:
+      - name: bobcraft
+        image: bobcraft:1.0.1
+        ports:
+        - containerPort: 25565
+        volumeMounts:
+        - mountPath: /root/minecraft
+          name: bobcraft
+        resources:
+          requests:
+            memory: 1Gi
+            cpu: 500m
+          limits:
+            memory: 3Gi
+            cpu: 1500m
+      volumes:
+      - name: bobcraft
+        persistentVolumeClaim:
+          claimName: bobcraft-pvc
